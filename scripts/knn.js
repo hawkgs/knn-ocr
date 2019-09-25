@@ -7,13 +7,40 @@ export class OcrKNN {
   test(data) {
     data = this.__sort(data);
     data = this.__flatten(data);
+    const distances = [];
 
-    console.log(data);
+    this.__trainingSet.forEach((l) => {
+      let sum = 0;
+      for (let i = 0; i < data.length; i += 1) {
+        sum += (data[i] - l.data[i]) * (data[i] - l.data[i]);
+      }
 
-    return {
-      clss: 'a',
-      confidence: 0.5
-    };
+      distances.push({
+        clss: l.clss,
+        dist: Math.sqrt(sum)
+      });
+    });
+
+    return distances
+      .sort((a, b) => a.dist - b.dist)
+      .map((d) => d.clss)
+      .slice(0, this.__k)
+      .reduce((map, lett) => {
+        let added = false;
+        for (let i = 0; i < map.length; i += 1) {
+          if (map[i][0] === lett) {
+            map[i][1] += 1;
+            added = true;
+          }
+        }
+        if (!added) {
+          map.push([lett, 1]);
+        }
+        return map;
+      }, [])
+      .sort((a, b) => b[1] - a[1])
+      .shift()
+      .shift();
   }
 
   train(trainingSet) {
