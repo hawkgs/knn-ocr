@@ -5,8 +5,7 @@ export class OcrKNN {
   }
 
   test(data) {
-    data = this.__sort(data);
-    data = this.__flatten(data);
+    data = this.__format(data);
     const distances = [];
 
     this.__trainingSet.forEach((l) => {
@@ -50,10 +49,18 @@ export class OcrKNN {
       trainingSet[clss].forEach((l) => {
         this.__trainingSet.push({
           clss,
-          data: this.__flatten(this.__sort(l))
+          data: this.__format(l)
         });
       });
     });
+
+    console.log(this.__trainingSet);
+  }
+
+  __format(data) {
+    data = this.__sort(data);
+    data = this.__normalize(data);
+    return this.__flatten(data);
   }
 
   __sort(data) {
@@ -64,6 +71,24 @@ export class OcrKNN {
       }
       return a.y - b.y;
     });
+  }
+
+  __normalize(data) {
+    const xs = data.map(l => l.x);
+    const ys = data.map(l => l.y);
+    const offsetX = Math.min(...xs);
+    const offsetY = Math.min(...ys);
+    let maxX = Math.max(...xs);
+    let maxY = Math.max(...ys);
+    maxX -= offsetX;
+    maxY -= offsetY;
+
+    console.log(offsetY, offsetY);
+
+    return data.map((l) => ({
+      x: (l.x - offsetX) / maxX,
+      y: (l.y - offsetY) / maxY
+    }));
   }
 
   __flatten(data) {
