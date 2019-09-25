@@ -1,0 +1,23 @@
+{
+  "name": "knn-ocr-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "serve -p 5000 ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hawkgs/knn-ocr-demo.git"
+  },
+  "author": "hawkgs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hawkgs/knn-ocr-demo/issues"
+  },
+  "homepage": "https://github.com/hawkgs/knn-ocr-demo#readme",
+  "devDependencies": {
+    "serve": "^11.1.0"
+  }
+}
