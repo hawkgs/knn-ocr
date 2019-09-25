@@ -1,3 +1,7 @@
+import { Letters } from './letters.js';
+import { OcrKNN } from './knn.js';
+
+const K = 3;
 const AVAILABLE_CLICKS = 20;
 let dots = [];
 let clicksLeft = AVAILABLE_CLICKS;
@@ -13,15 +17,16 @@ function initPlane() {
       return;
     }
 
-    dots.push(e.pageX, e.pageY);
+    const dot = { x: e.pageX, y: e.pageY };
+    dots.push(dot);
 
     clicksLeft -= 1;
     clicksLeftEl.innerText = clicksLeft;
 
     const dotEl = document.createElement('div');
     dotEl.classList.add('dot');
-    dotEl.style.top = e.pageY + 'px';
-    dotEl.style.left = e.pageX + 'px';
+    dotEl.style.top = dot.y + 'px';
+    dotEl.style.left = dot.x + 'px';
     plane.appendChild(dotEl);
   });
 }
@@ -45,10 +50,21 @@ function print() {
   print.addEventListener('click', () => console.log(dots));
 }
 
+function test() {
+  const knn = new OcrKNN(K, Letters);
+  const test = document.getElementById('test');
+
+  test.addEventListener('click', () => {
+    const result = knn.test(dots);
+    console.log(result);
+  });
+}
+
 function init() {
   initPlane();
   clean();
   print();
+  test();
 }
 
 init();
