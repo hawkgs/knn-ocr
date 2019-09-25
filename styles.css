@@ -11,6 +11,13 @@ body {
   cursor: crosshair;
 }
 
+#result {
+  padding: 20px 10px;
+  background: #eee;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
 .dot {
   background-color: rgb(40, 40, 159);
   position: absolute;

@@ -8,6 +8,7 @@ let clicksLeft = AVAILABLE_CLICKS;
 
 const plane = document.getElementById('plane');
 const clicksLeftEl = document.getElementById('clicks-left');
+const resultEl = document.getElementById('result');
 
 function initPlane() {
   clicksLeftEl.innerText = clicksLeft;
@@ -38,6 +39,8 @@ function clean() {
     clicksLeft = AVAILABLE_CLICKS;
     clicksLeftEl.innerText = clicksLeft;
 
+    resultEl.innerText = '';
+
     let child;
     while ((child = plane.firstChild)) {
       plane.removeChild(child);
@@ -56,7 +59,7 @@ function test() {
 
   test.addEventListener('click', () => {
     const result = knn.test(dots);
-    console.log(result);
+    resultEl.innerText = `The letter is "${result}"`;
   });
 }
 
