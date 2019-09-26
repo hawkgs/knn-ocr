@@ -8,7 +8,7 @@ export class OcrKNN {
     data = this.__format(data);
     const distances = [];
 
-    this.__trainingSet.forEach((l) => {
+    this.__trainingData.forEach((l) => {
       let sum = 0;
       for (let i = 0; i < data.length; i += 1) {
         sum += (data[i] - l.data[i]) * (data[i] - l.data[i]);
@@ -42,12 +42,12 @@ export class OcrKNN {
       .shift();
   }
 
-  train(trainingSet) {
-    this.__trainingSet = [];
+  train(trainingData) {
+    this.__trainingData = [];
 
-    Object.keys(trainingSet).forEach((clss) => {
-      trainingSet[clss].forEach((l) => {
-        this.__trainingSet.push({
+    Object.keys(trainingData).forEach((clss) => {
+      trainingData[clss].forEach((l) => {
+        this.__trainingData.push({
           clss,
           data: this.__format(l)
         });
