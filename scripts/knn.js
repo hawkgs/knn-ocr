@@ -76,10 +76,8 @@ export class OcrKNN {
     const ys = data.map(l => l.y);
     const offsetX = Math.min(...xs);
     const offsetY = Math.min(...ys);
-    let maxX = Math.max(...xs);
-    let maxY = Math.max(...ys);
-    maxX -= offsetX;
-    maxY -= offsetY;
+    const maxX = Math.max(...xs) - offsetX;
+    const maxY = Math.max(...ys) - offsetY;
 
     return data.map((l) => ({
       x: (l.x - offsetX) / maxX,
