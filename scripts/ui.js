@@ -3,6 +3,7 @@ import { OcrKNN } from './knn.js';
 
 const K = 3;
 const AVAILABLE_CLICKS = 20;
+
 let dots = [];
 let clicksLeft = AVAILABLE_CLICKS;
 
@@ -32,42 +33,42 @@ function initPlane() {
   });
 }
 
-function clean() {
-  const clean = document.getElementById('clean');
-  clean.addEventListener('click', () => {
-    dots = [];
-    clicksLeft = AVAILABLE_CLICKS;
-    clicksLeftEl.innerText = clicksLeft;
+function initCleanBtn() {
+  document.getElementById('clean')
+    .addEventListener('click', () => {
+      dots = [];
+      clicksLeft = AVAILABLE_CLICKS;
+      clicksLeftEl.innerText = clicksLeft;
 
-    resultEl.innerText = '';
+      resultEl.innerText = '';
 
-    let child;
-    while ((child = plane.firstChild)) {
-      plane.removeChild(child);
-    }
-  });
+      let child;
+      while ((child = plane.firstChild)) {
+        plane.removeChild(child);
+      }
+    });
 }
 
-function print() {
-  const print = document.getElementById('print');
-  print.addEventListener('click', () => console.log(dots));
+function initPrintBtn() {
+  document.getElementById('print')
+    .addEventListener('click', () => console.log(dots));
 }
 
-function test() {
+function initTestBtn() {
   const knn = new OcrKNN(K, Letters);
-  const test = document.getElementById('test');
 
-  test.addEventListener('click', () => {
-    const result = knn.test(dots);
-    resultEl.innerText = `The letter is "${result}"`;
-  });
+  document.getElementById('test')
+    .addEventListener('click', () => {
+      const result = knn.test(dots);
+      resultEl.innerText = `The letter is "${result}"`;
+    });
 }
 
 function init() {
   initPlane();
-  clean();
-  print();
-  test();
+  initCleanBtn();
+  initPrintBtn();
+  initTestBtn();
 }
 
 init();
