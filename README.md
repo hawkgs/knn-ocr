@@ -1,1 +1,1 @@
-# knn-ocr-demo
+# knn-ocr
