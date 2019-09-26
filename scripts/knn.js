@@ -53,8 +53,6 @@ export class OcrKNN {
         });
       });
     });
-
-    console.log(this.__trainingSet);
   }
 
   __format(data) {
@@ -82,8 +80,6 @@ export class OcrKNN {
     let maxY = Math.max(...ys);
     maxX -= offsetX;
     maxY -= offsetY;
-
-    console.log(offsetY, offsetY);
 
     return data.map((l) => ({
       x: (l.x - offsetX) / maxX,
