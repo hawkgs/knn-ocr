@@ -1,7 +1,7 @@
 export class OcrKNN {
-  constructor(k, trainingSet) {
+  constructor(k, trainingData) {
     this.__k = k;
-    this.train(trainingSet);
+    this.train(trainingData);
   }
 
   test(data) {
